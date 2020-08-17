@@ -96,8 +96,135 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+    # first pass
+
+        # # pick up first item since we cant compare None
+        # self.swap_item()
+        # self.move_right()
+        # # turn on sorting light
+        # self.set_light_on()
+        # # Do everything when the light is on:
+        # while self.light_is_on():
+        #     # if we can move right,
+        #     while self.can_move_right():
+        #         # compare items. if item on floor is bigger, swap
+        #         if self.compare_item() == -1:
+        #             self.swap_item()
+        #             self.move_right()
+        #         elif self.compare_item() == 1:
+        #             if self.can_move_left():
+        #                 self.swap_item()
+        #                 self.move_left()
+        #         elif self.compare_item() == None:
+        #             self.move_right()
+                    
+        #     # self.move_left()
+        #     # after we've moved through the list right, go left
+        #     while self.can_move_left():
+        #         if self.compare_item() == 1:
+        #             self.swap_item()
+        #         self.move_left()
+        #         # elif self.compare_item() == -1:
+        #         #     if self.can_move_right():
+        #         #         self.swap_item()
+        #         #         self.move_right()
+        #         #     else:
+        #         #         self.swap_item()
+                
+        #     # while self.can_move_left():
+        #     #     self.move_left()
+        #     self.move_right()
+        #     # check if anything in the list is smaller then held item
+        #     while self.can_move_right() and self.can_move_left():
+        #         if self.compare_item() == 1:
+        #             while self.can_move_left():
+        #                 self.move_left()
+        #             self.swap_item()
+        #             self.set_light_off()
+        #             self.sort()
+                
+        #         self.move_right()
+
+        #     if self.compare_item() == 1:
+        #         while self.can_move_left():
+        #             self.move_left()
+        #         self.swap_item()
+        #         self.set_light_off()
+        #         self.sort()
+        #     else:
+        #         while self.can_move_left():
+        #             self.move_left()
+        #         self.swap_item()
+        #         self.set_light_off()
+
+    # second pass
+
+        # self.swap_item()
+        # self.move_right()
+
+        # while self.can_move_right() and self.compare_item() == 1:
+        #     self.move_right()
+
+        # if self.compare_item() == 1:
+        #     self.swap_item()
+        #     self.move_left()
+        #     while self.compare_item() == 1:
+        #         self.swap_item()
+        #         # while self.can_move_left():
+        #         self.move_left()
+        #         # self.swap_item()
+        #         # self.sort()
+        #     if self.compare_item() == None:
+        #         return
+        #     self.sort()
+        # elif self.compare_item() == -1:
+        #     self.swap_item()
+        
+        #     while self.can_move_left():
+        #         self.move_left()
+        #     self.swap_item()
+        #     self.sort()
+        
+    # third pass
+        # set light on to represent starting of sort
+        self.set_light_on()
+
+        while self.light_is_on():
+            # light is immediately turned off so that 
+            # if we move through the list and find it inorder, the loop will stop
+            self.set_light_off()
+            # print("right")
+            # get largest number to the end of the list
+            while self.can_move_right():
+                # print(self._list)
+                self.swap_item()
+                self.move_right()
+                # if its bigger, switch places with next number
+                if self.compare_item() == 1:
+                    self.swap_item()
+                    # turn light on to indicate that a change of order has happened
+                    self.set_light_on()
+                self.move_left()
+                self.swap_item()
+                self.move_right()
+            # print("left")
+            # once largest number is at the end, move left 
+            # to get next largest number
+            while self.can_move_left():
+                # print(self._list)
+                self.swap_item()
+                self.move_left()
+                # if its bigger, switch places with next number
+                if self.compare_item() == -1:
+                    self.swap_item()
+                    # turn light on to indicate that a change of order has happened
+                    self.set_light_on()
+                self.move_right()
+                self.swap_item()
+                self.move_left()
+
+        # if light is off at this point, the function will end and _list should be sorted
+        return self._list  
 
 
 if __name__ == "__main__":
@@ -105,6 +232,8 @@ if __name__ == "__main__":
     # with `python robot_sort.py`
 
     l = [15, 41, 58, 49, 26, 4, 28, 8, 61, 60, 65, 21, 78, 14, 35, 90, 54, 5, 0, 87, 82, 96, 43, 92, 62, 97, 69, 94, 99, 93, 76, 47, 2, 88, 51, 40, 95, 6, 23, 81, 30, 19, 25, 91, 18, 68, 71, 9, 66, 1, 45, 33, 3, 72, 16, 85, 27, 59, 64, 39, 32, 24, 38, 84, 44, 80, 11, 73, 42, 20, 10, 29, 22, 98, 17, 48, 52, 67, 53, 74, 77, 37, 63, 31, 7, 75, 36, 89, 70, 34, 79, 83, 13, 57, 86, 12, 56, 50, 55, 46]
+
+    # l = [3,9,10,4,5]
 
     robot = SortingRobot(l)
 
